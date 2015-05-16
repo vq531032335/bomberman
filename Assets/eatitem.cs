@@ -3,21 +3,24 @@ using System.Collections;
 
 public class eatitem : MonoBehaviour {
 	private GameObject player;
-	private GameObject enemy;
+	private GameObject[] cruisers;
 
 	// Use this for initialization
 	void Start () {
-		player=GameObject.Find("aircraft");
-		enemy=GameObject.Find("enemy");
+		player=GameObject.FindGameObjectWithTag("Player");
+		cruisers=GameObject.FindGameObjectsWithTag("cruiser");
 	}
 	
 	// Update is called once per frame
 	void Update () {
-		caneat(ref player);
-		caneat(ref enemy);			
+		caneat(player);
+		foreach(GameObject enemy in cruisers)
+		{			
+			caneat(enemy);
+		}
 	}
 
-	void caneat(ref GameObject temp)
+	void caneat(GameObject temp)
 	{
 		if (renderer.enabled==true)
 		{
@@ -45,7 +48,7 @@ public class eatitem : MonoBehaviour {
 					}
 					else
 					{
-						AI ai=(AI)temp.GetComponent("AI");
+						cruiserAI ai=(cruiserAI)temp.GetComponent("cruiserAI");
 						ai.addspeed();
 					}
 					break;

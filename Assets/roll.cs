@@ -4,8 +4,7 @@ using System.Collections;
 public class roll : MonoBehaviour {
 
 	// Use this for initialization
-	void Start () {
-	
+	void Start () {	
 	}
 	
 	// Update is called once per frame

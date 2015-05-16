@@ -37,19 +37,19 @@ public class boomc : MonoBehaviour {
 			}
 			Destroy(collision.gameObject);
 		}
-		if(collision.gameObject.tag=="bomb1")
+		if(collision.gameObject.tag=="bomb")
 		{
 			Destroy(collision.gameObject);
 		}
-		if(collision.gameObject.tag=="bomb2")
-		{
-			Destroy(collision.gameObject);
-		}
-		if(collision.gameObject.tag=="Player"||collision.gameObject.tag=="enemy")
+		if(collision.gameObject.tag=="Player"||collision.gameObject.tag=="cruiser")
 		{
 			PutBomb pp=(PutBomb)collision.gameObject.GetComponent("PutBomb");
 			pp.minuslife();
-			Debug.Log(collision.gameObject.name+"--");
+		}
+		if(collision.gameObject.tag=="crasher")
+		{
+			crasherAI ai=(crasherAI)collision.gameObject.GetComponent("crasherAI");
+			ai.die();
 		}
 		if(collision.gameObject.name!="Space")
 		{

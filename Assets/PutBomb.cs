@@ -21,13 +21,6 @@ public class PutBomb : MonoBehaviour {
 		{
 			Put(1);
 		}
-		if(death)
-		{
-			this.gameObject.AddComponent("death");
-			death dd=(death)this.gameObject.GetComponent("death");
-			dd.bombfabs=bombfabs;
-
-		}
 	}
 	public void Put(int type)
 	{
@@ -35,16 +28,10 @@ public class PutBomb : MonoBehaviour {
 		{
 			Vector3 position=new Vector3(transform.position.x,0.3f,transform.position.z);
 			GameObject bomb=(GameObject)Instantiate(bombfabs,position,transform.rotation);
-			switch(type)
-			{
-			case 1:
-				bomb.tag="bomb1";
-				break;
-			case 2:
-				bomb.tag="bomb2";
-			    break;
-			}
+			bomb.tag="bomb";
+
 			boommm bbb=(boommm)bomb.GetComponent("boommm");
+			bbb.setmaster(this.gameObject);
 			bbb.setpower(power);
 			bbb.setlefttime(lefttime);
 			addBomb();
@@ -63,6 +50,10 @@ public class PutBomb : MonoBehaviour {
 	{
 		Maxbomb++;
 	}
+	public int getMaxBomb()
+	{
+		return Maxbomb;
+	}
 	public float getpower()
 	{
 		return power;
@@ -74,10 +65,15 @@ public class PutBomb : MonoBehaviour {
 	public void minuslife()
 	{
 		life--;
+		if (tag=="Player")
+		{
+			particleSystem.Play();
+		}
 		if(life<=0)
 		{
 			death=true;
 		}
+		Debug.Log(gameObject.name);
 	}
 	public void addlife()
 	{
