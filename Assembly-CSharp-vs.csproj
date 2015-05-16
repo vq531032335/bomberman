@@ -53,6 +53,7 @@
      <Compile Include="Assets\change.cs" />
      <Compile Include="Assets\death.cs" />
      <Compile Include="Assets\eatitem.cs" />
+     <Compile Include="Assets\findway.cs" />
      <Compile Include="Assets\randomrotate.cs" />
      <Compile Include="Assets\roll.cs" />
      <None Include="Assets\Standard Assets\Particles\Sources\Shaders\Particle Alpha Blend (Queue +100).shader" />
