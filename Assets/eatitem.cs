@@ -8,14 +8,15 @@ public class eatitem : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		player=GameObject.FindGameObjectWithTag("Player");
-		cruisers=GameObject.FindGameObjectsWithTag("cruiser");
+
 	}
 	
 	// Update is called once per frame
 	void Update () {
 		caneat(player);
+		cruisers=GameObject.FindGameObjectsWithTag("cruiser");
 		foreach(GameObject enemy in cruisers)
-		{			
+		{
 			caneat(enemy);
 		}
 	}
@@ -45,6 +46,7 @@ public class eatitem : MonoBehaviour {
 					{
 						ThirdPersonController TPC=(ThirdPersonController)temp.GetComponent("ThirdPersonController");
 						TPC.plusSpeed();
+						TPC.fullspeedup();
 					}
 					else
 					{

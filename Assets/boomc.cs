@@ -23,16 +23,16 @@ public class boomc : MonoBehaviour {
 			switch(Random.Range(1,probability))
 			{
 			case 1:
-				GameObject item1=(GameObject)Instantiate(item_volumefabs,position,transform.rotation);
+				Instantiate(item_volumefabs,position,transform.rotation);
 				break;
 			case 2:
-				GameObject item2=(GameObject)Instantiate(item_powerfabs,position,transform.rotation);
+				Instantiate(item_powerfabs,position,transform.rotation);
 				break;
 			case 3:
-				GameObject item3=(GameObject)Instantiate(item_speedfabs,position,transform.rotation);
+				Instantiate(item_speedfabs,position,transform.rotation);
 				break;
 			case 4:
-				GameObject item4=(GameObject)Instantiate(item_lifefabs,position,transform.rotation);
+				Instantiate(item_lifefabs,position,transform.rotation);
 				break;
 			}
 			Destroy(collision.gameObject);
@@ -49,6 +49,11 @@ public class boomc : MonoBehaviour {
 		if(collision.gameObject.tag=="crasher")
 		{
 			crasherAI ai=(crasherAI)collision.gameObject.GetComponent("crasherAI");
+			ai.die();
+		}
+		if(collision.gameObject.tag=="smoker")
+		{
+			smokerAI ai=(smokerAI)collision.gameObject.GetComponent("smokerAI");
 			ai.die();
 		}
 		if(collision.gameObject.name!="Space")

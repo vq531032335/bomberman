@@ -7,12 +7,10 @@ public class PutBomb : MonoBehaviour {
 	private int nowbomb;
 	public float power;
 	public int life;
-	private bool death;
 	public float lefttime;
 	// Use this for initialization
 	void Start () {
 		nowbomb=0;
-		death=false;
 	}
 	
 	// Update is called once per frame
@@ -68,12 +66,15 @@ public class PutBomb : MonoBehaviour {
 		if (tag=="Player")
 		{
 			particleSystem.Play();
+			gameObject.transform.FindChild("cuocuo").audio.Play();
 		}
 		if(life<=0)
 		{
-			death=true;
+			if(tag=="cruiser")
+			{
+				die();
+			}
 		}
-		Debug.Log(gameObject.name);
 	}
 	public void addlife()
 	{
@@ -82,5 +83,15 @@ public class PutBomb : MonoBehaviour {
 	public bool bombenable()
 	{
 		return Maxbomb>nowbomb;
+	}
+	private void die()
+	{
+		collider.enabled=false;
+		gameObject.transform.FindChild("audio").audio.Play();		
+		particleSystem.Play();
+		gameObject.transform.FindChild("particle1").particleSystem.Stop();
+		gameObject.transform.FindChild("particle2").particleSystem.Stop();
+		this.renderer.enabled=false;
+		Destroy(this.gameObject,4);
 	}
 }

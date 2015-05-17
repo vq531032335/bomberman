@@ -13,6 +13,9 @@ public var runMaxAnimationSpeed : float = 1.0;
 public var jumpAnimationSpeed : float = 1.15;
 public var landAnimationSpeed : float = 1.0;
 
+public var speeduptime:float=5.0;
+private var nowspeeduptime = 5.0;
+
 private var _animation : Animation;
 
 enum CharacterState {
@@ -89,6 +92,8 @@ private var lastGroundedTime = 0.0;
 
 
 private var isControllable = true;
+
+
 
 function Awake ()
 {
@@ -192,10 +197,11 @@ function UpdateSmoothedMovementDirection ()
 		_characterState = CharacterState.Idle;
 		
 		// Pick speed modifier
-		if (Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))
+		if ((Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))&& nowspeeduptime>0)
 		{
 			targetSpeed *= runSpeed;
 			_characterState = CharacterState.Running;
+			nowspeeduptime-=Time.deltaTime;
 		}
 		else if (Time.time - trotAfterSeconds > walkTimeStart)
 		{
@@ -386,6 +392,10 @@ function plusSpeed()
 walkSpeed+=0.5f;
 runSpeed+=0.5f;
 trotSpeed+=0.5f;
+}
+function fullspeedup()
+{
+nowspeeduptime=speeduptime;
 }
 
 function IsJumping () {

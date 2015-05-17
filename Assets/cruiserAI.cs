@@ -59,98 +59,99 @@ public class cruiserAI : MonoBehaviour {
 	}
 	
 	void Update () {
-		nowignoretime-=Time.deltaTime;
-		nowwandertime-=Time.deltaTime;
-		nowescapetime-=Time.deltaTime;
-
-		//make a decision
-		duringtime+=Time.deltaTime;
-		duringtime2+=Time.deltaTime;
-		if(duringtime>reacttime)
-		{
-			Debug.Log(State);
-			puttime=(3.0f/(putbomb.getMaxBomb()+1.0f));
-			neardistance=1.5f*(speed);
-			switch(State)
+		if (renderer.enabled==true)
+		{			
+			nowignoretime-=Time.deltaTime;
+			nowwandertime-=Time.deltaTime;
+			nowescapetime-=Time.deltaTime;
+			
+			//make a decision
+			duringtime+=Time.deltaTime;
+			duringtime2+=Time.deltaTime;
+			if(duringtime>reacttime)
 			{
-			case STATE_EAT:
-				if(nowignoretime<=0)
+				puttime=(3.0f/(putbomb.getMaxBomb()+1.0f));
+				neardistance=1.5f*(speed);
+				switch(State)
 				{
-					rotate (targetitem);
-				}
-				if(targetitem==null)
-				{
-					State=STATE_WANDER;
-					rotate(null);
+				case STATE_EAT:
+					if(nowignoretime<=0)
+					{
+						rotate (targetitem);
+					}
+					if(targetitem==null)
+					{
+						State=STATE_WANDER;
+						rotate(null);
+						break;
+					}
+					else if(targetitem.renderer.enabled==false)
+					{
+						State=STATE_WANDER;
+						rotate(null);
+						break;
+					}
+					if(Vector3.Distance(transform.position,lastposition)<sensitivity*speed*Time.deltaTime)
+					{
+						nowignoretime=ignoretime;
+						rotate(null);
+						wantputbomb();
+					}
+					else if(indanger())
+					{
+						rotate(null);
+					}
+					break;
+				case STATE_WANDER:				
+					targetitem=finditem();
+					if(targetitem!=null)
+					{
+						State=STATE_EAT;
+						rotate (targetitem);
+						break;
+					}
+					if (Random.Range(0.0f,1.0f)<aggressive/5&&nowescapetime<=0)
+					{
+						State=STATE_ATTACK;
+						rotate(player);
+						break;
+					}
+					if(Vector3.Distance(transform.position,lastposition)<sensitivity*speed*Time.deltaTime||nowwandertime<=0)
+					{
+						nowwandertime=wandertime;
+						rotate(null);
+						wantputbomb();
+					}
+					else if(indanger())
+					{
+						nowwandertime=wandertime;
+						rotate(null);
+					}
+					break;
+				case STATE_ATTACK:
+					if(putbomb.bombenable()==false||Vector3.Distance(transform.position,lastposition)<sensitivity*speed*Time.deltaTime)
+					{
+						nowescapetime=escapetime;
+						State=STATE_WANDER;
+						rotate(null);
+						break;
+					}
+					if (nearplayer())
+					{
+						wantputbomb();
+					}
 					break;
 				}
-				else if(targetitem.renderer.enabled==false)
-				{
-					State=STATE_WANDER;
-					rotate(null);
-					break;
-				}
-				if(Vector3.Distance(transform.position,lastposition)<sensitivity*speed*Time.deltaTime)
-				{
-					nowignoretime=ignoretime;
-					rotate(null);
-					wantputbomb();
-				}
-				else if(indanger())
-				{
-					rotate(null);
-				}
-				break;
-			case STATE_WANDER:				
-				targetitem=finditem();
-				if(targetitem!=null)
-				{
-					State=STATE_EAT;
-					rotate (targetitem);
-					break;
-				}
-				if (Random.Range(0.0f,1.0f)<aggressive/5&&nowescapetime<=0)
-				{
-					State=STATE_ATTACK;
-					rotate(player);
-					break;
-				}
-				if(Vector3.Distance(transform.position,lastposition)<sensitivity*speed*Time.deltaTime||nowwandertime<=0)
-				{
-					nowwandertime=wandertime;
-					rotate(null);
-					wantputbomb();
-				}
-				else if(indanger())
-				{
-					nowwandertime=wandertime;
-					rotate(null);
-				}
-				break;
-			case STATE_ATTACK:
-				if(putbomb.bombenable()==false||Vector3.Distance(transform.position,lastposition)<sensitivity*speed*Time.deltaTime)
-				{
-					nowescapetime=escapetime;
-					State=STATE_WANDER;
-					rotate(null);
-					break;
-				}
-				if (nearplayer())
-				{
-					Debug.Log("ss");
-					wantputbomb();
-				}
-				break;
+				duringtime=0.0f;
 			}
-			duringtime=0.0f;
-		}
-		
-		//move
-		direction=transform.forward;
-		lastposition=transform.position;
-		controller.Move(direction*Time.deltaTime*speed);
-		
+			
+			//move
+			direction=transform.forward;
+			lastposition=transform.position;
+			controller.Move(direction*Time.deltaTime*speed);
+		}		
 	}
+
 	public void addspeed()
 	{
 		speed+=0.5f;
