@@ -16,6 +16,8 @@ public var landAnimationSpeed : float = 1.0;
 public var speeduptime:float=5.0;
 private var nowspeeduptime = 5.0;
 
+private var speedOn=false;
+
 private var _animation : Animation;
 
 enum CharacterState {
@@ -93,12 +95,10 @@ private var lastGroundedTime = 0.0;
 
 private var isControllable = true;
 
-
-
 function Awake ()
 {
+	gameObject.transform.FindChild("particle1").particleSystem.Play();
 	moveDirection = transform.TransformDirection(Vector3.forward);
-	
 	_animation = GetComponent(Animation);
 	if(!_animation)
 		Debug.Log("The character you would like to control doesn't have animations. Moving her might look weird.");
@@ -199,12 +199,26 @@ function UpdateSmoothedMovementDirection ()
 		// Pick speed modifier
 		if ((Input.GetKey (KeyCode.LeftShift) || Input.GetKey (KeyCode.RightShift))&& nowspeeduptime>0)
 		{
+			if(speedOn==false)
+			{
+				speedOn=true;
+				gameObject.transform.FindChild("speedup").audio.Play();
+				gameObject.transform.FindChild("particle2").particleSystem.Play();
+				gameObject.transform.FindChild("particle1").particleSystem.Stop();
+			}
 			targetSpeed *= runSpeed;
 			_characterState = CharacterState.Running;
 			nowspeeduptime-=Time.deltaTime;
 		}
 		else if (Time.time - trotAfterSeconds > walkTimeStart)
 		{
+			if(speedOn==true)
+			{
+				speedOn=false;
+				gameObject.transform.FindChild("speedup").audio.Pause();
+				gameObject.transform.FindChild("particle1").particleSystem.Play();
+				gameObject.transform.FindChild("particle2").particleSystem.Stop();
+			}
 			targetSpeed *= trotSpeed;
 			_characterState = CharacterState.Trotting;
 		}

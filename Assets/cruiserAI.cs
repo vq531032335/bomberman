@@ -1,13 +1,13 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class cruiserAI : MonoBehaviour {	
 	private CharacterController controller;
-	private PutBomb putbomb;
-	
+	private PutBomb putbomb;	
 	private GameObject player;
 	
-	private int State;
+	private int State;//state changing
 	public const int STATE_EAT=0;
 	public const int STATE_WANDER=1;
 	public const int STATE_ATTACK=2;
@@ -20,26 +20,29 @@ public class cruiserAI : MonoBehaviour {
 
 	private float neardistance;
 	
-	public float speed;
+	public float speed;//controll movement
 	private Vector3 direction;
 	private Vector3 lastposition;
 	private GameObject targetitem;
 	
-	public float wandertime;
+	public float wandertime;//interval of change direction
 	private float nowwandertime;
 
-	public float ignoretime;
+	public float ignoretime;//time of ignore item
 	private float nowignoretime;
 
-	public float escapetime;
+	public float escapetime;//time of escape from bomb
 	private float nowescapetime;
 	
 	public float sensitivity;//more likely to turn round
-	public float intell;//more likely to make smart decision
+	public float intell;//more likely to make reverse decision
 	public float aggressive;//more likely to attack 
 	
 	void Start () {
+		controller=(CharacterController)gameObject.GetComponent("CharacterController");
+		putbomb=(PutBomb)gameObject.GetComponent("PutBomb");
 		player=GameObject.FindGameObjectWithTag("Player");
+
 		State=STATE_WANDER;
 		
 		puttime=1.0f;
@@ -49,13 +52,10 @@ public class cruiserAI : MonoBehaviour {
 		direction=transform.forward;
 		lastposition=transform.position;
 		targetitem=null;
+
 		nowignoretime=0.0f;
 		nowwandertime=0.0f;
-		nowescapetime=0.0f;
-		
-		controller=(CharacterController)gameObject.GetComponent("CharacterController");
-		putbomb=(PutBomb)gameObject.GetComponent("PutBomb");
-		
+		nowescapetime=0.0f;	
 	}
 	
 	void Update () {
@@ -64,14 +64,14 @@ public class cruiserAI : MonoBehaviour {
 			nowignoretime-=Time.deltaTime;
 			nowwandertime-=Time.deltaTime;
 			nowescapetime-=Time.deltaTime;
-			
-			//make a decision
 			duringtime+=Time.deltaTime;
 			duringtime2+=Time.deltaTime;
+
 			if(duringtime>reacttime)
 			{
+				//make a decision
 				puttime=(3.0f/(putbomb.getMaxBomb()+1.0f));
-				neardistance=1.5f*(speed);
+				neardistance=0.5f*(speed+putbomb.getMaxBomb());
 				switch(State)
 				{
 				case STATE_EAT:
@@ -136,18 +136,25 @@ public class cruiserAI : MonoBehaviour {
 						rotate(null);
 						break;
 					}
-					if (nearplayer())
-					{
-						wantputbomb();
-					}
 					break;
 				}
 				duringtime=0.0f;
+			}
+
+			//put bomb
+			if(State==STATE_ATTACK)
+			{
+				if (nearplayer())
+				{
+					wantputbomb();
+				}
 			}
 			
 			//move
 			direction=transform.forward;
 			lastposition=transform.position;
+			Vector3 fixposition=new Vector3(lastposition.x, 0.8f,lastposition.z);
+			transform.position=fixposition;
 			controller.Move(direction*Time.deltaTime*speed);
 		}		
 	}
@@ -207,9 +214,11 @@ public class cruiserAI : MonoBehaviour {
 		finditem2("item_power",ref mindistance,ref minitem);
 		finditem2("item_speed",ref mindistance,ref minitem);
 		finditem2("item_life",ref mindistance,ref minitem);
-		if (mindistance<10.0f)
+		if (mindistance<(speed+1.0f)*4.0f)
 		{
-			if(Vector3.Distance(minitem.transform.position,player.transform.position)>mindistance)
+			ThirdPersonController TPC=(ThirdPersonController)player.GetComponent("ThirdPersonController");
+			float temp=TPC.GetSpeed();
+			if(Vector3.Distance(minitem.transform.position,player.transform.position)*speed/temp>mindistance)
 			{
 				return minitem;
 			}

@@ -1,23 +1,20 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class change : MonoBehaviour {
-
+	//change bomb's light
 	Color colorstart=Color.red;
 	Color colorend=Color.green;
 	public float duration;
 	float t;
-	// Use this for initialization
+
 	void Start () {
 		t=Time.time;
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		float lerp=Mathf.PingPong(Time.time-t,duration)/duration;
-		light.color=Color.Lerp(colorstart,colorend,lerp);
-	
+		light.color=Color.Lerp(colorstart,colorend,lerp);	
 	}
-
-
 }

@@ -1,31 +1,42 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class smokerAI : MonoBehaviour {
 	private CharacterController controller;
 	public float speed;
+	private float rantime;
+	private bool nowaudioon;
 
 	private GameObject target;
-	private float rantime;
-
-	public float attacktime;
+	public float attacktime;//interval of damage
 	private float nowattacktime;
 	public float attackdistance;
 
-	public Vector3 point1;
+	public Vector3 point1;//patrol between the 2 points
 	public Vector3 point2;
-	private int status;
+
+	private int status;//controll patrol
+
+	private bool death;
 
 	void Start () {
 		controller=(CharacterController)gameObject.GetComponent("CharacterController");
+		rantime=Random.Range(0.0f,3.0f);
+		nowaudioon=false;
 		target=GameObject.FindGameObjectWithTag("Player");
-		rantime=Random.Range(0.0f,1.0f);
 		nowattacktime=0.0f;
 		status=0;
+		death=false;
 	}
 
 	void Update () {
-		if (renderer.enabled==true)
+		if (Time.time>rantime &&nowaudioon==false)
+		{
+			nowaudioon=true;
+			gameObject.transform.FindChild("audio").audio.Play();
+		}
+		if (death==false)
 		{			
 			//smoke
 			nowattacktime-=Time.deltaTime;
@@ -76,6 +87,7 @@ public class smokerAI : MonoBehaviour {
 
 	public void die()
 	{
+		death=true;
 		collider.enabled=false;
 		gameObject.transform.FindChild("particle").particleSystem.Stop();
 		audio.Play();

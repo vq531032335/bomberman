@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class PutBomb : MonoBehaviour {
 	public GameObject bombfabs;
@@ -8,13 +9,17 @@ public class PutBomb : MonoBehaviour {
 	public float power;
 	public int life;
 	public float lefttime;
-	// Use this for initialization
+
+	public float invincibletime;
+	private float nowinvincibletime;
+
 	void Start () {
 		nowbomb=0;
+		nowinvincibletime=0;
 	}
 	
-	// Update is called once per frame
 	void Update () {
+		nowinvincibletime-=Time.deltaTime;
 		if(Input.GetKeyDown(KeyCode.Space)&& tag=="Player")
 		{
 			Put(1);
@@ -62,18 +67,23 @@ public class PutBomb : MonoBehaviour {
 	}
 	public void minuslife()
 	{
-		life--;
-		if (tag=="Player")
+		if(nowinvincibletime<=0)
 		{
-			particleSystem.Play();
-			gameObject.transform.FindChild("cuocuo").audio.Play();
-		}
-		if(life<=0)
-		{
-			if(tag=="cruiser")
+			life--;
+			if (tag=="Player")
 			{
-				die();
+				particleSystem.Play();
+				gameObject.transform.FindChild("cuocuo").audio.Play();
+				Debug.Log(life);
 			}
+			if(life<=0)
+			{
+				if(tag=="cruiser")
+				{
+					die();
+				}
+			}
+			nowinvincibletime=invincibletime;
 		}
 	}
 	public void addlife()
@@ -84,7 +94,7 @@ public class PutBomb : MonoBehaviour {
 	{
 		return Maxbomb>nowbomb;
 	}
-	private void die()
+	private void die()//for cruiser
 	{
 		collider.enabled=false;
 		gameObject.transform.FindChild("audio").audio.Play();		

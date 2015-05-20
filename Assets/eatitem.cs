@@ -1,17 +1,15 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class eatitem : MonoBehaviour {
 	private GameObject player;
 	private GameObject[] cruisers;
-
-	// Use this for initialization
+	
 	void Start () {
 		player=GameObject.FindGameObjectWithTag("Player");
-
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 		caneat(player);
 		cruisers=GameObject.FindGameObjectsWithTag("cruiser");
@@ -19,6 +17,7 @@ public class eatitem : MonoBehaviour {
 		{
 			caneat(enemy);
 		}
+		transform.Rotate(0.0f,Time.deltaTime*100,0.0f);
 	}
 
 	void caneat(GameObject temp)

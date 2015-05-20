@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class boomc : MonoBehaviour {
 	public GameObject item_volumefabs;
@@ -7,16 +8,16 @@ public class boomc : MonoBehaviour {
 	public GameObject item_speedfabs;
 	public GameObject item_lifefabs;
 	public int probability;
-	// Use this for initialization
+
 	void Start () {
 	}
-	
-	// Update is called once per frame
+
 	void Update () {
 	}
 
 	void OnCollisionEnter(Collision collision)
 	{
+		//make item
 		if(collision.gameObject.tag=="stone"&&collision.gameObject.renderer.enabled==true)
 		{
 			Vector3 position=new Vector3(collision.gameObject.transform.position.x,0.5f,collision.gameObject.transform.position.z);
@@ -35,12 +36,18 @@ public class boomc : MonoBehaviour {
 				Instantiate(item_lifefabs,position,transform.rotation);
 				break;
 			}
+			collision.gameObject.renderer.enabled=false;
 			Destroy(collision.gameObject);
 		}
+
+		//boom bomb
 		if(collision.gameObject.tag=="bomb")
 		{
-			Destroy(collision.gameObject);
+			boommm bbb=(boommm)collision.gameObject.GetComponent("boommm");
+			bbb.go();
 		}
+
+		//minus life
 		if(collision.gameObject.tag=="Player"||collision.gameObject.tag=="cruiser")
 		{
 			PutBomb pp=(PutBomb)collision.gameObject.GetComponent("PutBomb");
@@ -56,6 +63,8 @@ public class boomc : MonoBehaviour {
 			smokerAI ai=(smokerAI)collision.gameObject.GetComponent("smokerAI");
 			ai.die();
 		}
+
+		//dis
 		if(collision.gameObject.name!="Space")
 		{
 			Destroy(this.gameObject);
