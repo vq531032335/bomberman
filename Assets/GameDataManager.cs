@@ -11,25 +11,90 @@ using System;
 using System.Text;
 using System.Xml;
 using System.Security.Cryptography;
+
+
 //GameData,储存数据的类，把需要储存的数据定义在GameData之内就行//
 public class GameData
 {
+
+
 	//密钥,用于防止拷贝存档//
 	public string key;
 	
 	//下面是添加需要储存的内容//
-	public string PlayerName;
-	public float MusicVolume;
+	public float leveltime;
+
+	public Vector3 PlayerPosition;
+
+	public int smokerNum;
+	public Vector3[] smokerPosition;
+	public Vector3[] smokerPoint1;
+	public Vector3[] smokerPoint2;
+
+	public int crasherNum;
+	public Vector3[] crasherPosition;
+
+	public int cruiserNum;
+	public Vector3[] cruiserPosition;
+
+	public int stoneNum;
+	public Vector3[] stonePosition;
+
+	public int ironballNum;
+	public Vector3[] ironballPosition;
+
 	public GameData()
 	{
-		PlayerName = "Player";
-		MusicVolume = 0.6f;
+
+		if(GameObject.Find("space").renderer.enabled)//制作关卡,true为编辑模式
+		{
+			leveltime=360.0f;
+			PlayerPosition = new Vector3(-8.0f,1.4f,-8.0f);
+			
+			smokerNum=1;
+			smokerPosition=new Vector3[smokerNum];
+			smokerPoint1=new Vector3[smokerNum];
+			smokerPoint2=new Vector3[smokerNum];
+			smokerPosition[0]=new Vector3(-5.0f,2.0f,-5.0f);
+			smokerPoint1[0]=new Vector3(8.0f,2.0f,-8.0f);
+			smokerPoint2[0]=new Vector3(-8.0f,2.0f,8.0f);
+			
+			crasherNum=1;
+			crasherPosition=new Vector3[crasherNum];
+			crasherPosition[0]=new Vector3(-4.0f,2.7f,-3.0f);
+			
+			cruiserNum=1;
+			cruiserPosition=new Vector3[cruiserNum];
+			cruiserPosition[0]=new Vector3(0.0f,0.8f,0.0f);
+
+			//用来编辑石头和铁块
+			GameObject[] ddd=GameObject.FindGameObjectsWithTag("stone");
+			stoneNum=ddd.Length;
+			stonePosition=new Vector3[stoneNum];
+			int q=0;
+			foreach(GameObject pp in ddd)
+			{
+				stonePosition[q]=pp.transform.position;
+				q++;
+			}
+			GameObject[] eee=GameObject.FindGameObjectsWithTag("ironball");
+			ironballNum=eee.Length;
+			ironballPosition=new Vector3[ironballNum];
+			int p=0;
+			foreach(GameObject pp in eee)
+			{
+				ironballPosition[p]=pp.transform.position;
+				p++;
+			}
+		}
+		 
 	}
 }
 //管理数据储存的类//
 public class GameDataManager:MonoBehaviour
 {
-	private string dataFileName ="fucker.dat";//存档文件的名称,自己定//
+	public string dataFileName ="level1.dat";
+	//存档文件的名称,自己定//
 	private  XmlSaver xs = new XmlSaver();
 	
 	public  GameData gameData;
@@ -75,6 +140,7 @@ public class GameDataManager:MonoBehaviour
 		{
 			if(gameData != null)
 				Save();
+			Debug.Log("save successfully!");
 		}
 	}
 	

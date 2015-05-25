@@ -94,4 +94,10 @@ public class smokerAI : MonoBehaviour {
 		this.renderer.enabled=false;
 		Destroy(this.gameObject,2);
 	}
+
+	public void setPoint(Vector3 position1,Vector3 position2)
+	{
+		point1=position1;
+		point2=position2;
+	}
 }
