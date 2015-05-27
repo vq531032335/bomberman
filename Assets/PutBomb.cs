@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class PutBomb : MonoBehaviour {
 	public GameObject bombfabs;
@@ -7,26 +8,21 @@ public class PutBomb : MonoBehaviour {
 	private int nowbomb;
 	public float power;
 	public int life;
-	private bool death;
 	public float lefttime;
-	// Use this for initialization
+
+	public float invincibletime;
+	private float nowinvincibletime;
+
 	void Start () {
 		nowbomb=0;
-		death=false;
+		nowinvincibletime=0;
 	}
 	
-	// Update is called once per frame
 	void Update () {
+		nowinvincibletime-=Time.deltaTime;
 		if(Input.GetKeyDown(KeyCode.Space)&& tag=="Player")
 		{
 			Put(1);
-		}
-		if(death)
-		{
-			this.gameObject.AddComponent("death");
-			death dd=(death)this.gameObject.GetComponent("death");
-			dd.bombfabs=bombfabs;
-
 		}
 	}
 	public void Put(int type)
@@ -35,16 +31,10 @@ public class PutBomb : MonoBehaviour {
 		{
 			Vector3 position=new Vector3(transform.position.x,0.3f,transform.position.z);
 			GameObject bomb=(GameObject)Instantiate(bombfabs,position,transform.rotation);
-			switch(type)
-			{
-			case 1:
-				bomb.tag="bomb1";
-				break;
-			case 2:
-				bomb.tag="bomb2";
-			    break;
-			}
+			bomb.tag="bomb";
+
 			boommm bbb=(boommm)bomb.GetComponent("boommm");
+			bbb.setmaster(this.gameObject);
 			bbb.setpower(power);
 			bbb.setlefttime(lefttime);
 			addBomb();
@@ -63,6 +53,10 @@ public class PutBomb : MonoBehaviour {
 	{
 		Maxbomb++;
 	}
+	public int getMaxBomb()
+	{
+		return Maxbomb;
+	}
 	public float getpower()
 	{
 		return power;
@@ -73,10 +67,23 @@ public class PutBomb : MonoBehaviour {
 	}
 	public void minuslife()
 	{
-		life--;
-		if(life<=0)
+		if(nowinvincibletime<=0)
 		{
-			death=true;
+			life--;
+			if (tag=="Player")
+			{
+				particleSystem.Play();
+				gameObject.transform.FindChild("cuocuo").audio.Play();
+				Debug.Log(life);
+			}
+			if(life<=0)
+			{
+				if(tag=="cruiser")
+				{
+					die();
+				}
+			}
+			nowinvincibletime=invincibletime;
 		}
 	}
 	public void addlife()
@@ -86,5 +93,15 @@ public class PutBomb : MonoBehaviour {
 	public bool bombenable()
 	{
 		return Maxbomb>nowbomb;
+	}
+	private void die()//for cruiser
+	{
+		collider.enabled=false;
+		gameObject.transform.FindChild("audio").audio.Play();		
+		particleSystem.Play();
+		gameObject.transform.FindChild("particle1").particleSystem.Stop();
+		gameObject.transform.FindChild("particle2").particleSystem.Stop();
+		this.renderer.enabled=false;
+		Destroy(this.gameObject,4);
 	}
 }

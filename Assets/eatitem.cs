@@ -1,23 +1,26 @@
 ﻿using UnityEngine;
 using System.Collections;
+//standard
 
 public class eatitem : MonoBehaviour {
 	private GameObject player;
-	private GameObject enemy;
-
-	// Use this for initialization
-	void Start () {
-		player=GameObject.Find("aircraft");
-		enemy=GameObject.Find("enemy");
-	}
+	private GameObject[] cruisers;
 	
-	// Update is called once per frame
-	void Update () {
-		caneat(ref player);
-		caneat(ref enemy);			
+	void Start () {
+		player=GameObject.FindGameObjectWithTag("Player");
 	}
 
-	void caneat(ref GameObject temp)
+	void Update () {
+		caneat(player);
+		cruisers=GameObject.FindGameObjectsWithTag("cruiser");
+		foreach(GameObject enemy in cruisers)
+		{
+			caneat(enemy);
+		}
+		transform.Rotate(0.0f,Time.deltaTime*100,0.0f);
+	}
+
+	void caneat(GameObject temp)
 	{
 		if (renderer.enabled==true)
 		{
@@ -42,10 +45,11 @@ public class eatitem : MonoBehaviour {
 					{
 						ThirdPersonController TPC=(ThirdPersonController)temp.GetComponent("ThirdPersonController");
 						TPC.plusSpeed();
+						TPC.fullspeedup();
 					}
 					else
 					{
-						AI ai=(AI)temp.GetComponent("AI");
+						cruiserAI ai=(cruiserAI)temp.GetComponent("cruiserAI");
 						ai.addspeed();
 					}
 					break;
