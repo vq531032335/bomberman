@@ -46,7 +46,7 @@ public class GameData
 	public GameData()
 	{
 
-		if(GameObject.Find("space").renderer.enabled)//制作关卡,true为编辑模式
+		if(GameObject.Find("Space").renderer.enabled)//制作关卡,true为编辑模式
 		{
 			leveltime=360.0f;
 			PlayerPosition = new Vector3(-8.0f,1.4f,-8.0f);
