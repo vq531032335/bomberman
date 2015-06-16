@@ -22,6 +22,7 @@ public class GameData
 	public string key;
 	
 	//下面是添加需要储存的内容//
+	public int read;
 	public float leveltime;
 
 	public Vector3 PlayerPosition;
@@ -48,8 +49,9 @@ public class GameData
 
 		if(GameObject.Find("Space").renderer.enabled)//制作关卡,true为编辑模式
 		{
+			read=1;
 			leveltime=360.0f;
-			PlayerPosition = new Vector3(-8.0f,1.4f,-8.0f);
+			PlayerPosition = new Vector3(-8.0f,2.0f,-8.0f);
 			
 			smokerNum=1;
 			smokerPosition=new Vector3[smokerNum];

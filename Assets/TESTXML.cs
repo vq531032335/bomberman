@@ -13,7 +13,8 @@ public class TESTXML : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 		GameDataManager GDM=(GameDataManager)GameObject.Find("TopCamera").GetComponent("GameDataManager");
-
+		while(GDM.gameData.read==0){
+		}
 		for(int i=0;i<GDM.gameData.smokerNum;i++)
 		{
 			Instantiate(smoker,GDM.gameData.smokerPosition[i],smoker.transform.rotation);
@@ -28,7 +29,7 @@ public class TESTXML : MonoBehaviour {
 		{
 			Instantiate(cruiser,GDM.gameData.cruiserPosition[i],cruiser.transform.rotation);
 		}
-
+		
 		for(int i=0;i<GDM.gameData.stoneNum;i++)
 		{
 			Instantiate(stone,GDM.gameData.stonePosition[i],stone.transform.rotation);
@@ -37,9 +38,8 @@ public class TESTXML : MonoBehaviour {
 		{
 			Instantiate(ironball,GDM.gameData.ironballPosition[i],ironball.transform.rotation);
 		}
-
+		
 		Instantiate(Player,GDM.gameData.PlayerPosition,Player.transform.rotation);
-
 
 
 	}
