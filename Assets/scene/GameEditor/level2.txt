@@ -1,0 +1,38 @@
+leveltime=300.0f;
+			PlayerPosition = new Vector3(-8.0f,1.4f,-8.0f);
+			
+			smokerNum=4;
+			smokerPosition=new Vector3[smokerNum];
+			smokerPoint1=new Vector3[smokerNum];
+			smokerPoint2=new Vector3[smokerNum];
+			smokerPosition[0]=new Vector3(5.5f,2.0f,-4.0f);
+			smokerPoint1[0]=new Vector3(5.5f,2.0f,-4.0f);
+			smokerPoint2[0]=new Vector3(5.5f,2.0f,4.0f);
+			smokerPosition[1]=new Vector3(0.0f,2.0f,-4.0f);
+			smokerPoint1[1]=new Vector3(0.0f,2.0f,-4.0f);
+			smokerPoint2[1]=new Vector3(0.0f,2.0f,4.0f);
+			smokerPosition[2]=new Vector3(-4.0f,2.0f,-4.0f);
+			smokerPoint1[2]=new Vector3(-4.0f,2.0f,-4.0f);
+			smokerPoint2[2]=new Vector3(-4.0f,2.0f,4.0f);
+			smokerPosition[3]=new Vector3(-7.0f,2.0f,8.0f);
+			smokerPoint1[3]=new Vector3(-7.0f,2.0f,8.0f);
+			smokerPoint2[3]=new Vector3(4.0f,2.0f,8.0f);
+			
+			crasherNum=14;
+			crasherPosition=new Vector3[crasherNum];
+			crasherPosition[0]=new Vector3(-5.2f,2.7f,0.0f);
+			crasherPosition[1]=new Vector3(-5.0f,2.7f,-0.85f);
+			crasherPosition[2]=new Vector3(-1.0f,2.7f,-0.56f);
+			crasherPosition[3]=new Vector3(-3.0f,2.7f,3.5f);
+			crasherPosition[4]=new Vector3(-3.0f,2.7f,4.5f);
+			crasherPosition[5]=new Vector3(-1.0f,2.7f,3.0f);
+			crasherPosition[6]=new Vector3(1.0f,2.7f,-3.5f);
+			crasherPosition[7]=new Vector3(-3.0f,2.7f,-9.0f);
+			crasherPosition[8]=new Vector3(5.7f,2.7f,-3.0f);
+			crasherPosition[9]=new Vector3(5.0f,2.7f,-9.0f);
+			crasherPosition[10]=new Vector3(-5.5f,2.7f,7.0f);
+			crasherPosition[11]=new Vector3(7.3f,2.7f,4.5f);
+			crasherPosition[12]=new Vector3(4.7f,2.7f,8.0f);
+			crasherPosition[13]=new Vector3(8.0f,2.7f,7.0f);
+			
+			cruiserNum=0;

@@ -19,7 +19,7 @@
 	<DebugType>full</DebugType>
 	<Optimize>false</Optimize>
 	<OutputPath>Temp\bin\Debug\</OutputPath>
-	<DefineConstants>DEBUG;TRACE;UNITY_4_6_5;UNITY_4_6;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
+	<DefineConstants>DEBUG;TRACE;UNITY_4_6_5;UNITY_4_6;UNITY_64;UNITY_STANDALONE_WIN;ENABLE_MICROPHONE;ENABLE_TEXTUREID_MAP;ENABLE_UNITYEVENTS;ENABLE_NEW_HIERARCHY ;ENABLE_AUDIO_FMOD;UNITY_STANDALONE;ENABLE_TERRAIN;ENABLE_SUBSTANCE;ENABLE_GENERICS;INCLUDE_IL2CPP;INCLUDE_WP8SUPPORT;ENABLE_MOVIES;ENABLE_WWW;ENABLE_IMAGEEFFECTS;ENABLE_4_6_FEATURES;INCLUDE_WP_BLUE_SUPPORT;ENABLE_WEBCAM;INCLUDE_METROSUPPORT;RENDER_SOFTWARE_CURSOR;ENABLE_NETWORK;ENABLE_PHYSICS;UNITY5_SCRIPTING_IN_UNITY4;ENABLE_CACHING;ENABLE_CLOTH;ENABLE_2D_PHYSICS;ENABLE_SHADOWS;ENABLE_AUDIO;ENABLE_NAVMESH_CARVING;ENABLE_DUCK_TYPING;ENABLE_SINGLE_INSTANCE_BUILD_SETTING;ENABLE_MONO;ENABLE_PROFILER;UNITY_EDITOR;UNITY_EDITOR_WIN</DefineConstants>
 	<ErrorReport>prompt</ErrorReport>
 	<WarningLevel>4</WarningLevel>
 	<NoWarn>0169</NoWarn>
@@ -46,12 +46,6 @@
 	</Reference>
   </ItemGroup>
   <ItemGroup>
-     <Compile Include="Assets\AI.cs" />
-     <Compile Include="Assets\CountDown.cs" />
-     <Compile Include="Assets\GameDataManager.cs" />
-     <Compile Include="Assets\LevelController.cs" />
-     <Compile Include="Assets\MenuController.cs" />
-     <Compile Include="Assets\Mouse.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipItems.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\EquipRandomItem.cs" />
      <Compile Include="Assets\NGUI\Examples\Scripts\InventorySystem\Game\UICursor.cs" />
@@ -186,24 +180,28 @@
      <Compile Include="Assets\NGUI\Scripts\UI\UITexture.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UITooltip.cs" />
      <Compile Include="Assets\NGUI\Scripts\UI\UIViewport.cs" />
-     <Compile Include="Assets\OnLevelClick.cs" />
-     <Compile Include="Assets\OnQuitClick.cs" />
-     <Compile Include="Assets\PutBomb.cs" />
-     <Compile Include="Assets\TESTXML.cs" />
-     <Compile Include="Assets\XmlSaver.cs" />
-     <Compile Include="Assets\boomc.cs" />
-     <Compile Include="Assets\boommm.cs" />
-     <Compile Include="Assets\change.cs" />
-     <Compile Include="Assets\crasherAI.cs" />
-     <Compile Include="Assets\cruiserAI.cs" />
-     <Compile Include="Assets\death.cs" />
-     <Compile Include="Assets\eatitem.cs" />
-     <Compile Include="Assets\esc.cs" />
-     <Compile Include="Assets\findway.cs" />
-     <Compile Include="Assets\randomrotate.cs" />
-     <Compile Include="Assets\roll.cs" />
-     <Compile Include="Assets\smokerAI.cs" />
-     <Compile Include="Assets\start.cs" />
+     <Compile Include="Assets\script\CountDown.cs" />
+     <Compile Include="Assets\script\GameDataManager.cs" />
+     <Compile Include="Assets\script\MenuController.cs" />
+     <Compile Include="Assets\script\Mouse.cs" />
+     <Compile Include="Assets\script\OnLevelClick.cs" />
+     <Compile Include="Assets\script\OnQuitClick.cs" />
+     <Compile Include="Assets\script\PutBomb.cs" />
+     <Compile Include="Assets\script\TESTXML.cs" />
+     <Compile Include="Assets\script\XmlSaver.cs" />
+     <Compile Include="Assets\script\boomc.cs" />
+     <Compile Include="Assets\script\boommm.cs" />
+     <Compile Include="Assets\script\change.cs" />
+     <Compile Include="Assets\script\crasherAI.cs" />
+     <Compile Include="Assets\script\cruiserAI.cs" />
+     <Compile Include="Assets\script\death.cs" />
+     <Compile Include="Assets\script\eatitem.cs" />
+     <Compile Include="Assets\script\esc.cs" />
+     <Compile Include="Assets\script\findway.cs" />
+     <Compile Include="Assets\script\randomrotate.cs" />
+     <Compile Include="Assets\script\roll.cs" />
+     <Compile Include="Assets\script\smokerAI.cs" />
+     <Compile Include="Assets\script\start.cs" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth Cutout.shader" />
      <None Include="Assets\NGUI\ReadMe - 3.6.8.txt" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text 2.shader" />
@@ -232,9 +230,11 @@
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Text.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed.shader" />
      <None Include="Assets\NGUI\Resources\Shaders\Unlit - Transparent Packed 3.shader" />
+     <None Include="Assets\scene\GameEditor\level1.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Additive Colored.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\Refractive\Refractive Font - Header.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Refractive.shader" />
+     <None Include="Assets\scene\GameEditor\level2.txt" />
      <None Include="Assets\NGUI\Examples\Shaders\Unlit - Depth.shader" />
      <None Include="Assets\NGUI\Examples\Atlases\SciFi\SciFi Font - Normal.txt" />
      <None Include="Assets\NGUI\Examples\Models\Orc Armor\Orc Armor.shader" />
