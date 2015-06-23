@@ -1,0 +1,17 @@
+read=1;
+			leveltime=300.0f;
+			PlayerPosition = new Vector3(-8.0f,1.4f,-8.0f);
+			
+			smokerNum=0;
+			
+			crasherNum=0;
+			
+			cruiserNum=3;
+			cruiserPosition=new Vector3[cruiserNum];
+			cruiserDifficult=new int[cruiserNum];
+			cruiserPosition[0]=new Vector3(8.0f,2.0f,-8.0f);
+			cruiserDifficult[0]=2;
+			cruiserPosition[1]=new Vector3(-8.0f,2.0f,8.0f);
+			cruiserDifficult[1]=2;
+			cruiserPosition[2]=new Vector3(8.0f,2.0f,8.0f);
+			cruiserDifficult[2]=2;

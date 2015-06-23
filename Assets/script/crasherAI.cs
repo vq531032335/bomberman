@@ -27,6 +27,7 @@ public class crasherAI : MonoBehaviour {
 		}
 		if(nowtime<=attacktime)
 		{
+			gameObject.transform.FindChild("Point light").light.enabled=true;
 			//move
 			if (death==false)
 			{
@@ -39,6 +40,10 @@ public class crasherAI : MonoBehaviour {
 				pp.minuslife();
 				die();
 			}
+		}
+		else
+		{
+			gameObject.transform.FindChild("Point light").light.enabled=false;
 		}
 	}
 	public void die()

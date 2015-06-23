@@ -21,6 +21,7 @@ public class PutBomb : MonoBehaviour {
 	private UISprite[] bombPic=new UISprite[10];
 
 	private UILabel bombpower;
+	private UILabel walkspeed;
 
 	void Awake()
 	{
@@ -34,6 +35,7 @@ public class PutBomb : MonoBehaviour {
 				bombPic[i] = GameObject.Find ("BombPic"+(i+1).ToString()).GetComponent<UISprite> ();
 			}
 			bombpower = GameObject.Find ("powerlabel").GetComponent<UILabel>();
+			walkspeed = GameObject.Find ("speedlabel").GetComponent<UILabel>();
 			for(int i=0;i!=maxLife;i++)
 			{
 				blood[i].alpha=1;
@@ -83,6 +85,8 @@ public class PutBomb : MonoBehaviour {
 			}
 
 			bombpower.text="bomb power:"+power;
+			ThirdPersonController TPC=(ThirdPersonController)gameObject.GetComponent("ThirdPersonController");
+			walkspeed.text="Speed:"+ TPC.GetSpeed();
 
 		}
 		if(Input.GetKeyDown(KeyCode.Space)&& tag=="Player")

@@ -39,6 +39,7 @@ public class cruiserAI : MonoBehaviour {
 	public float aggressive;//more likely to attack 
 
 	public int difficult;
+	private bool diff;
 	
 	void Awake () {
 		controller=(CharacterController)gameObject.GetComponent("CharacterController");
@@ -58,10 +59,19 @@ public class cruiserAI : MonoBehaviour {
 		nowignoretime=0.0f;
 		nowwandertime=0.0f;
 		nowescapetime=0.0f;	
-		setDifficult();
+
+		diff=false;
 	}
 	
 	void Update () {
+		if(diff==false)
+		{
+			if(difficult!=0)
+			{
+				setDifficult();
+				diff=true;
+			}
+		}
 		if (renderer.enabled==true)
 		{			
 			nowignoretime-=Time.deltaTime;
@@ -176,6 +186,7 @@ public class cruiserAI : MonoBehaviour {
 	}
 	private void wantputbomb()
 	{
+
 		PutBomb putbomb=(PutBomb)gameObject.GetComponent("PutBomb");
 		if(duringtime2>puttime)
 		{

@@ -407,7 +407,7 @@ function OnControllerColliderHit (hit : ControllerColliderHit )
 }
 
 function GetSpeed () {
-	return moveSpeed;
+	return walkSpeed;
 }
 //for item
 function plusSpeed()

@@ -107,7 +107,7 @@ public class MenuController : MonoBehaviour {
 
 	public void OnNextClick()
 	{
-		if(GameDataManager.level<3)
+		if(GameDataManager.level<4)
 		{			
 			GameDataManager.level++;
 		}

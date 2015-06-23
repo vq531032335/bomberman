@@ -1,19 +1,22 @@
 ﻿<Properties>
-  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="MonoDevelop.Default" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\script\MenuController.cs">
+  <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\scene\GameEditor\level1.txt">
     <Files>
-      <File FileName="Assets\script\smokerAI.cs" Line="72" Column="6" />
-      <File FileName="Assets\script\MenuController.cs" Line="109" Column="3" />
-      <File FileName="Assets\script\GameDataManager.cs" Line="58" Column="4" />
-      <File FileName="Assets\script\OnLevelClick.cs" Line="15" Column="35" />
-      <File FileName="Assets\script\PutBomb.cs" Line="85" Column="25" />
-      <File FileName="Assets\script\TESTXML.cs" Line="13" Column="32" />
-      <File FileName="Assets\script\cruiserAI.cs" Line="303" Column="15" />
-      <File FileName="Assets\script\crasherAI.cs" Line="29" Column="4" />
-      <File FileName="Assets\script\boomc.cs" Line="40" Column="11" />
-      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" Line="17" Column="31" />
-      <File FileName="Assets\script\eatitem.cs" Line="46" Column="7" />
       <File FileName="Assets\script\CountDown.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\smokerAI.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\MenuController.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\GameDataManager.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\OnLevelClick.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\PutBomb.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\cruiserAI.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\crasherAI.cs" Line="1" Column="1" />
+      <File FileName="Assets\script\boomc.cs" Line="1" Column="1" />
+      <File FileName="Assets\Standard Assets\Character Controllers\Sources\Scripts\ThirdPersonController.js" Line="1" Column="1" />
+      <File FileName="Assets\script\eatitem.cs" Line="1" Column="1" />
+      <File FileName="Assets\scene\GameEditor\level1.txt" Line="32" Column="44" />
+      <File FileName="Assets\scene\GameEditor\level2.txt" Line="1" Column="1" />
+      <File FileName="Assets\scene\GameEditor\level3.txt" Line="1" Column="1" />
+      <File FileName="Assets\script\TESTXML.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>

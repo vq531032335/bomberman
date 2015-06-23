@@ -51,23 +51,18 @@ public class GameData
 		if(GameObject.Find("Space").renderer.enabled)//制作关卡,true为编辑模式
 		{
 			read=1;
-			leveltime=300.0f;
+			leveltime=180.0f;
 			PlayerPosition = new Vector3(-8.0f,1.4f,-8.0f);
 			
 			smokerNum=0;
 			
 			crasherNum=0;
 			
-			cruiserNum=3;
+			cruiserNum=1;
 			cruiserPosition=new Vector3[cruiserNum];
 			cruiserDifficult=new int[cruiserNum];
-			cruiserPosition[0]=new Vector3(8.0f,2.0f,-8.0f);
-			cruiserDifficult[0]=2;
-			cruiserPosition[1]=new Vector3(-8.0f,2.0f,8.0f);
-			cruiserDifficult[1]=2;
-			cruiserPosition[2]=new Vector3(8.0f,2.0f,8.0f);
-			cruiserDifficult[2]=2;
-
+			cruiserPosition[0]=new Vector3(8.0f,2.0f,8.0f);
+			cruiserDifficult[0]=3;
 			//用来编辑石头和铁块
 			GameObject[] ddd=GameObject.FindGameObjectsWithTag("stone");
 			stoneNum=ddd.Length;
@@ -94,8 +89,8 @@ public class GameData
 //管理数据储存的类//
 public class GameDataManager:MonoBehaviour
 {
-	public static int level=3;
-	public static string dataFileName ="level3.dat";
+	public static int level=4;
+	public static string dataFileName ="level4.dat";
 	//存档文件的名称,自己定//
 	private  XmlSaver xs = new XmlSaver();
 	

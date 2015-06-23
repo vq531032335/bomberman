@@ -13,10 +13,11 @@ public class CountDown : MonoBehaviour {
 
 	void FixedUpdate () {
 		levelTime -= Time.deltaTime;
-	}
-
-	void Update () {
 		countDownLabel.text = getTime (levelTime);
+		if(levelTime<60)
+		{
+			countDownLabel.font.material.color=Color.red;
+		}
 	}
 
 	string getTime(float time)
